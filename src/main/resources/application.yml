@@ -3,11 +3,16 @@ micronaut:
     name: cartoes
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: ${DATA_BASE_URL:`jdbc:postgresql://localhost`}:${DATA_BASE_PORT:5433}/${DATA_BASE_NAME:cartoes_db}
     driverClassName: org.postgresql.Driver
-    username: postgres
-    password: ''
-    schema-generate: CREATE_DROP
+    username: '${DATA_BASE_USER:postgres}'
+    password: '${DATA_BASE_PASSWORD:root}'
     dialect: POSTGRES
-jpa.default.properties.hibernate.hbm2ddl.auto: update
-kafka.bootstrap.servers: localhost:9092
+jpa.default.properties.hibernate.hbm2ddl.auto: create-drop
+kafka:
+  bootstrap:
+    servers: '${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}'
+
+grpc:
+  server:
+    port: 50053

@@ -7,14 +7,20 @@ option objc_class_prefix = "HLW";
 
 package br.zupedu.ot4;
 
+import "google/protobuf/timestamp.proto";
+
 service CartoesService {
-  rpc send (CartoesRequest) returns (CartoesReply) {}
+  rpc consultar (ConsultaCartaoRequest) returns (ConsultaCartaoResponse) {}
 }
 
-message CartoesRequest {
-  string name = 1;
+message ConsultaCartaoRequest {
+  string titular = 1;
+  int32 limite = 2;
+  int64 idProposta = 4;
 }
 
-message CartoesReply {
-  string message = 1;
+message ConsultaCartaoResponse {
+  string numero = 1;
+  string id = 2;
+  google.protobuf.Timestamp emitidoEm = 3;
 }
